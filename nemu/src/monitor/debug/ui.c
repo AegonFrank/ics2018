@@ -50,7 +50,7 @@ static int cmd_si(char *args) {
   }
 
   if (i <= 0) {
-    printf("Invalid argument");
+    printf("Invalid argument\n");
   }
   else {
     cpu_exec(i);
