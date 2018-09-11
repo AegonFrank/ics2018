@@ -40,11 +40,22 @@ static int cmd_help(char *args);
 
 static int cmd_si(char *args) {
   char *arg = strtok(NULL, " ");
-  int i = atoi(arg);
-  if (i <= 0) {
-    printf("invalid argument");
+  int i;
+
+  if (arg == NULL) {
+    i = 1;
   }
-  cpu_exec(i);
+  else {
+    i = atoi(arg);
+  }
+
+  if (i <= 0) {
+    printf("Invalid argument");
+  }
+  else {
+    cpu_exec(i);
+  }
+
   return 0;
 }
 
