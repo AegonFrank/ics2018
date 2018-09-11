@@ -39,7 +39,12 @@ static int cmd_q(char *args) {
 static int cmd_help(char *args);
 
 static int cmd_si(char *args) {
-  cpu_exec(-1);
+  char *arg = strtok(NULL, " ");
+  int i = atoi(arg);
+  if (i <= 0) {
+    printf("invalid argument");
+  }
+  cpu_exec(i);
   return 0;
 }
 
