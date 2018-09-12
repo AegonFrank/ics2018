@@ -59,6 +59,10 @@ static int cmd_si(char *args) {
   return 0;
 }
 
+static int cmd_info(char *args) {
+  return 0;
+}
+
 static struct {
   char *name;
   char *description;
@@ -70,7 +74,7 @@ static struct {
 
   /* TODO: Add more commands */
   { "si", "Execute a given number of instructions, default 1", cmd_si },
-
+  { "info", "Print program status", cmd_info },
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
