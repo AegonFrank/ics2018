@@ -66,7 +66,7 @@ static int cmd_info(char *args) {
     
   }
   else if (strcmp(arg, "r") == 0) {
-    printf("print registers\n");
+    printf("eax\t%x\t%d\n", cpu.eax, cpu.eax);
   }
 
   return 0;
