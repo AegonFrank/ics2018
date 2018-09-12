@@ -66,11 +66,12 @@ static int cmd_info(char *args) {
     
   }
   else if (strcmp(arg, "r") == 0) {
-    for (int i = 0; i < 9; ++i) {
+    for (int i = 0; i < 8; ++i) {
       const char* name = reg_name(i, 4);
       rtlreg_t val = reg_l(i);
       printf("%s\t\t0x%x\t\t%d\n", name, val, val);
     }
+    printf("eip\t\t0x%x\t\t%d\n", cpu.eip, cpu.eip);
   }
 
   return 0;
