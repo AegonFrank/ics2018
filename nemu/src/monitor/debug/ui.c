@@ -85,8 +85,15 @@ static int cmd_x(char *args) {
     int len = atoi(arg1);
     vaddr_t addr = strtol(arg2, NULL, 16);
     for (int i = 0; i < len; ++i) {
+      if (i % 8 == 0) {
+	printf("0x%x\t", addr + i);
+      }
       printf("0x%x ", vaddr_read(addr + i, 1));
+      if ((i + 1) % 8 == 0) {
+	printf("\n");
+      }
     }
+    printf("\n");
   }
   return 0;
 }
