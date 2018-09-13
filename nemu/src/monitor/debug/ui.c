@@ -77,6 +77,18 @@ static int cmd_info(char *args) {
   return 0;
 }
 
+static int cmd_x(char *args) {
+  char *arg1 = strtok(NULL, " ");
+  char *arg2 = strtok(NULL, " ");
+  
+  if (arg1 != NULL && arg2 != NULL) {
+    int len = atoi(arg1);
+    vaddr_t addr = strtol(arg2, NULL, 16);
+    printf("%x\n", vaddr_read(addr, len)); 
+  }
+  return 0;
+}
+
 static struct {
   char *name;
   char *description;
@@ -89,6 +101,7 @@ static struct {
   /* TODO: Add more commands */
   { "si", "Execute a given number of instructions, default 1", cmd_si },
   { "info", "Print program status", cmd_info },
+  { "x", "Scanning memory", cmd_x },
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
