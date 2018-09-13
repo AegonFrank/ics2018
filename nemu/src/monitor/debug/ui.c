@@ -84,7 +84,9 @@ static int cmd_x(char *args) {
   if (arg1 != NULL && arg2 != NULL) {
     int len = atoi(arg1);
     vaddr_t addr = strtol(arg2, NULL, 16);
-    printf("%x\n", vaddr_read(addr, len)); 
+    for (int i = 0; i < len; ++i) {
+      printf("0x%x ", vaddr_read(addr + i, 1));
+    }
   }
   return 0;
 }
