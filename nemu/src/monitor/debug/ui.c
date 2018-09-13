@@ -88,7 +88,7 @@ static int cmd_x(char *args) {
       if (i % 8 == 0) {
 	printf("0x%x\t", addr + i);
       }
-      printf("0x%2x\t", vaddr_read(addr + i, 1));
+      printf("0x%02x\t", vaddr_read(addr + i, 1));
       if ((i + 1) % 8 == 0) {
 	printf("\n");
       }
