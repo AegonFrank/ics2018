@@ -100,14 +100,21 @@ static int cmd_x(char *args) {
 
 static int cmd_p(char *args) {
   char *arg = strtok(NULL, " ");
+  if (arg == NULL) {
+    printf("Expression needed\n");
+    return 0;
+  }
+
   bool success;
   uint32_t ans = expr(arg, &success);
+
   if (!success) {
     printf("Syntax error\n");
   }
   else {
     printf("%s = %d\n", arg, ans);
   }
+
   return 0;
 }
 
