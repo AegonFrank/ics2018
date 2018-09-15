@@ -98,6 +98,19 @@ static int cmd_x(char *args) {
   return 0;
 }
 
+static int cmd_p(char *args) {
+  char *arg = strtok(NULL, " ");
+  bool success;
+  uint32_t ans = expr(arg, &success);
+  if (!success) {
+    printf("Syntax error\n");
+  }
+  else {
+    printf("%s = %d\n", arg, ans);
+  }
+  return 0;
+}
+
 static struct {
   char *name;
   char *description;
@@ -111,6 +124,7 @@ static struct {
   { "si", "Execute a given number of instructions, default 1", cmd_si },
   { "info", "Print program status", cmd_info },
   { "x", "Scanning memory", cmd_x },
+  { "p", "Evaluate expression", cmd_p },
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
