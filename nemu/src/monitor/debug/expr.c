@@ -111,6 +111,10 @@ static bool make_token(char *e) {
   return true;
 }
 
+bool check_parentheses(int begin, int end) {
+  return false;
+}
+
 uint32_t eval(int begin, int end, bool *success) {
   if (begin > end) {
     assert(0);
@@ -124,7 +128,12 @@ uint32_t eval(int begin, int end, bool *success) {
       return atoi(tokens[begin].str);
     }
   }
-  return 0;
+  else if (check_parentheses(begin, end) == true) {
+    return eval(begin + 1, end - 1, success);
+  }
+  else {
+    return 0;
+  }
 }
 
 uint32_t expr(char *e, bool *success) {
