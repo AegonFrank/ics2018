@@ -115,6 +115,20 @@ bool check_parentheses(int begin, int end) {
   if (!(tokens[begin].type == '(' && tokens[end].type == ')')) {
     return false;
   }
+  int stack = 0;
+  for (int i = begin + 1; i < end; ++i) {
+    if (tokens[i].type == '(') {
+      ++stack;
+    }
+    else if (tokens[i].type == ')') {
+      if (--stack < 0) {
+        return false;
+      }
+    }
+  }
+  if (stack > 0) {
+    return false;
+  }
   return true;
 }
 
