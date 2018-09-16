@@ -120,7 +120,8 @@ bool check_parentheses(int begin, int end) {
 
 uint32_t eval(int begin, int end, bool *success) {
   if (begin > end) {
-    assert(0);
+    *success = false;
+    return 0;
   }
   else if (begin == end) {
     if (tokens[begin].type != TK_DEC) {
