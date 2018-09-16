@@ -30,7 +30,7 @@ static struct rule {
   {"\\/", '/'},         // divide
   {"\\(", '('},         // left brace
   {"\\)", ')'},         // right brace
-  {"[0-9]+", TK_DEC},     // decimal
+  {"[0-9]+", TK_DEC},   // decimal
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
