@@ -89,11 +89,11 @@ static bool make_token(char *e) {
 	  case TK_NOTYPE: 
 	    break;
 	  case TK_DEC: 
-	    assert(nr_token < 32);
 	    assert(substr_len < 32);
 	    strncpy(tokens[nr_token].str, substr_start, substr_len);
 	    tokens[nr_token].str[substr_len] = '\0';
           default: 
+	    assert(nr_token < 32);
 	    tokens[nr_token++].type = rules[i].token_type;
         }
 
