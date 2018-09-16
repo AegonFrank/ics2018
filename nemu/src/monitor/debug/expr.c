@@ -5,6 +5,7 @@
  */
 #include <sys/types.h>
 #include <regex.h>
+#include <stdlib.h>
 
 enum {
   TK_NOTYPE = 256, TK_EQ,
@@ -111,6 +112,18 @@ static bool make_token(char *e) {
 }
 
 uint32_t eval(int begin, int end, bool *success) {
+  if (begin > end) {
+    assert(0);
+  }
+  else if (begin == end) {
+    if (tokens[begin].type != TK_DEC) {
+      *success = false;
+      return 0;
+    }
+    else {
+      return atoi(tokens[begin].str);
+    }
+  }
   return 0;
 }
 
@@ -121,6 +134,6 @@ uint32_t expr(char *e, bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-
+  *success = true;
   return eval(0, nr_token - 1, success);
 }
