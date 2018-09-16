@@ -206,8 +206,27 @@ uint32_t eval(int begin, int end, bool *success) {
   }
   else {
     int m_op = find_main_operator(begin, end);
-    printf("%c", tokens[m_op].type);
-    return 0;
+    if (m_op == -1) {
+      *success = false;
+      return 0;
+    }
+    uint32_t lhs = eval(begin, m_op - 1, success);
+    if (!success) return 0;
+    uint32_t rhs = eval(m_op + 1, end, success);
+    if (!success) return 0;
+
+    switch (tokens[m_op].type) {
+      case '+':
+        return lhs + rhs;
+      case '-':
+        return lhs - rhs;
+      case '*':
+        return lhs * rhs;
+      case '/':
+        return lhs / rhs;
+      default:
+        assert(0);
+    }
   }
 }
 
