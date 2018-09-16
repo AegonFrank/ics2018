@@ -132,6 +132,61 @@ bool check_parentheses(int begin, int end) {
   return true;
 }
 
+bool is_operator(int index) {
+  switch(tokens[index].type) {
+    case '+':
+    case '-':
+    case '*':
+    case '/':
+      return true;
+    default:
+      return false;
+  }
+}
+
+int priority(int index) {
+  switch(tokens[index].type) {
+    case '+':
+    case '-':
+      return 1;
+    case '*':
+    case '/':
+      return 2;
+    default:
+      assert(0);
+  }
+}
+
+int find_main_operator(int begin, int end) {
+  int res = -1;
+  int stack = 0;
+
+  for (int i = begin; i <= end; ++i) {
+    if (tokens[i].type == '(') {
+      ++stack;
+    }
+    else if (tokens[i].type == ')') {
+      if (--stack < 0) {
+        return -1;
+      }
+    }
+    else if (is_operator(i)) {
+      if (stack != 0) {
+        continue;
+      }
+      if (res == -1 || priority(res) >= priority(i)) {
+        res = i;
+      }
+    }
+  }
+
+  if (stack > 0) {
+    return -1;
+  }
+ 
+  return res;
+}
+
 uint32_t eval(int begin, int end, bool *success) {
   if (begin > end) {
     *success = false;
@@ -150,6 +205,8 @@ uint32_t eval(int begin, int end, bool *success) {
     return eval(begin + 1, end - 1, success);
   }
   else {
+    int m_op = find_main_operator(begin, end);
+    printf("%d", m_op);
     return 0;
   }
 }
