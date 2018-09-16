@@ -117,6 +117,7 @@ uint32_t expr(char *e, bool *success) {
       default: printf("%c", tokens[i].type);
     }
   }
+  *success = true;
 
   return 0;
 }
