@@ -115,13 +115,6 @@ uint32_t expr(char *e, bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  for (int i = 0; i < nr_token; ++i) {
-    switch(tokens[i].type) {
-      case TK_DEC: printf("%s", tokens[i].str); break;
-      default: printf("%c", tokens[i].type);
-    }
-  }
-  printf("\n");
   *success = true;
 
   return 0;
