@@ -206,7 +206,7 @@ uint32_t eval(int begin, int end, bool *success) {
   }
   else {
     int m_op = find_main_operator(begin, end);
-    printf("%d", m_op);
+    printf("%c", tokens[m_op].type);
     return 0;
   }
 }
