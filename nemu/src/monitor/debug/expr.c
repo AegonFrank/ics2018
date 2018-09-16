@@ -112,7 +112,10 @@ static bool make_token(char *e) {
 }
 
 bool check_parentheses(int begin, int end) {
-  return false;
+  if (!(tokens[begin].type == '(' && tokens[end].type == ')')) {
+    return false;
+  }
+  return true;
 }
 
 uint32_t eval(int begin, int end, bool *success) {
