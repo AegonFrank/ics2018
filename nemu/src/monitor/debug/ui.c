@@ -129,10 +129,7 @@ static int cmd_test(char *args) {
     char *ans = strtok(buf, " ");
     char *arg = strtok(NULL, "\n");
     bool success;
-    if (expr(arg, &success) != atoi(ans)) {
-      printf("%u != %u", expr(arg, &success), atoi(ans));
-      break;
-    }
+    printf("%u = %u\n", expr(arg, &success), atoi(ans));
   }
 
   fclose(fp);
