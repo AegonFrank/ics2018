@@ -117,6 +117,17 @@ static int cmd_p(char *args) {
   return 0;
 }
 
+static int cmd_test(char *args) {
+  FILE *fp = fopen(args, "r");
+  if (fp == NULL) {
+    printf("Tests not found\n");
+    return 0;
+  }
+
+  fclose(fp);
+  return 0;
+}
+
 static struct {
   char *name;
   char *description;
@@ -131,6 +142,7 @@ static struct {
   { "info", "Print program status", cmd_info },
   { "x", "Scanning memory", cmd_x },
   { "p", "Evaluate expression", cmd_p },
+  { "test", "Run expression evaluation tests", cmd_test },
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
