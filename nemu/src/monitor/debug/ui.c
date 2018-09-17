@@ -123,6 +123,11 @@ static int cmd_test(char *args) {
     printf("Tests not found\n");
     return 0;
   }
+  
+  int ch;
+  while ((ch = fgetc(fp)) != EOF) {
+    putchar(ch);
+  }
 
   fclose(fp);
   return 0;
