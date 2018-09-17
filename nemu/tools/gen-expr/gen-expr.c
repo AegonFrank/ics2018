@@ -27,6 +27,7 @@ void gen_num() {
   int val = choose(1000);
   int len = sprintf(&buf[cursor], "%d", val);
   cursor += len;
+  buf[cursor++] = 'u';
 
   gen_spaces();
 }
