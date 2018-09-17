@@ -126,7 +126,8 @@ static int cmd_test(char *args) {
  
   char buf[1000]; 
   while (fgets(buf, 1000, fp) != NULL) {
-    printf("%s", buf);
+    char *ans = strtok(buf, " ");
+    printf("%s ", ans);
   }
 
   fclose(fp);
