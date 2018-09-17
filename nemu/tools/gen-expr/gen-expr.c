@@ -60,7 +60,7 @@ void gen_expr(int depth) {
     gen_op();
     gen_expr(depth + 1);
   }
-  else if (depth < 5) {
+  else if (depth < 10) {
     switch(choose(5)) {
       case 0:
         gen_expr(depth + 1);
