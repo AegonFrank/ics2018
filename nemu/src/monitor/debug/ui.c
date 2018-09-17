@@ -127,8 +127,8 @@ static int cmd_test(char *args) {
   char buf[1000]; 
   while (fgets(buf, 1000, fp) != NULL) {
     char *ans = strtok(buf, " ");
-    char *expr = ans + strlen(ans) + 1;
-    printf("%s = %s", ans, expr);
+    char *arg = ans + strlen(ans) + 1;
+    printf("%s", arg);
   }
 
   fclose(fp);
