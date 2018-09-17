@@ -129,8 +129,11 @@ static int cmd_test(char *args) {
     char *ans = strtok(buf, " ");
     char *arg = strtok(NULL, "\n");
     bool success;
-    printf("%u = %u\n", expr(arg, &success), atoi(ans));
+    int lhs = expr(arg, &success), rhs = atoi(ans);
+    assert(lhs == rhs);
+    printf("%u == %u, OK\n", lhs, rhs);
   }
+  printf("All tests passed\n");
 
   fclose(fp);
   return 0;
