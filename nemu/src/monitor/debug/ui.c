@@ -125,8 +125,9 @@ static int cmd_test(char *args) {
   }
  
   char buf[1000]; 
-  fgets(buf, 1000, fp);
-  printf("%s", buf);
+  while (fgets(buf, 1000, fp) != NULL) {
+    printf("%s", buf);
+  }
 
   fclose(fp);
   return 0;
