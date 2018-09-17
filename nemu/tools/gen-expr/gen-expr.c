@@ -7,8 +7,84 @@
 
 // this should be enough
 static char buf[65536];
+
+int cursor;
+
+uint32_t choose(uint32_t n) {
+  return rand() % n;
+}
+
+void gen_spaces() {
+  int n = choose(3);
+  for (int i = 0; i < n; ++i) {
+    buf[cursor++] = ' ';
+  }
+}
+
+void gen_num() {
+  gen_spaces();
+
+  int val = choose(1000);
+  int len = sprintf(&buf[cursor], "%d", val);
+  cursor += len;
+
+  gen_spaces();
+}
+
+void gen(char c) {
+  gen_spaces();
+
+  buf[cursor++] = c;
+  
+  gen_spaces();
+}
+
+void gen_op() {
+  gen_spaces();
+
+  char op;
+  switch(choose(4)) {
+    case 0: op = '+'; break;
+    case 1: op = '-'; break;
+    case 2: op = '*'; break;
+    default: op = '/'; break;
+  }
+  buf[cursor++] = op;
+
+  gen_spaces();
+}
+
+void gen_expr(int depth) {
+  if (depth == 0) {
+    gen_expr(depth + 1);
+    gen_op();
+    gen_expr(depth + 1);
+  }
+  else if (depth < 5) {
+    switch(choose(5)) {
+      case 0:
+        gen_expr(depth + 1);
+        gen_op();
+        gen_expr(depth + 1);
+        break;
+      case 1:
+        gen('(');
+        gen_expr(depth + 1);
+        gen(')');
+        break;
+      default:
+        gen_num();
+    }
+  }
+  else {
+    gen_num();
+  }
+}
+
 static inline void gen_rand_expr() {
-  buf[0] = '\0';
+  cursor = 0;
+  gen_expr(0);
+  buf[cursor] = '\0';
 }
 
 static char code_buf[65536];
