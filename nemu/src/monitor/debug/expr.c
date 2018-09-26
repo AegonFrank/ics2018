@@ -31,7 +31,7 @@ static struct rule {
   {"\\/", '/'},            // divide
   {"\\(", '('},            // left brace
   {"\\)", ')'},            // right brace
-  {"0x[0-9a-f]+", TK_HEX}, // hexadecimal
+  {"0x[0-9a-f]+u?", TK_HEX}, // hexadecimal
   {"[0-9]+u?", TK_DEC},    // decimal
 };
 
