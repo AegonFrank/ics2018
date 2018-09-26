@@ -50,5 +50,10 @@ void print_wp() {
     printf("No watchpoints\n");
   }
   else {
+    WP *wp = head;
+    while (wp != NULL) {
+      printf("%d\n", wp->NO);
+      wp = wp->next;
+    }
   }
 }
