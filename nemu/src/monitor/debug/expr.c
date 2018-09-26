@@ -198,6 +198,9 @@ uint32_t eval(int begin, int end, bool *success) {
     if (tokens[begin].type == TK_DEC) {
       return atoi(tokens[begin].str);
     }
+    else if (tokens[begin].type == TK_HEX) {
+      return strtol(tokens[begin].str, NULL, 16);
+    }
     else {
       *success = false;
       return 0;
