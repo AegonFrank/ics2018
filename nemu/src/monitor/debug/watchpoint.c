@@ -45,4 +45,10 @@ void free_wp(WP *wp) {
   free_ = wp;
 }
 
-
+void print_wp() {
+  if (head == NULL) {
+    printf("No watchpoints\n");
+  }
+  else {
+  }
+}
