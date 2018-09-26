@@ -25,7 +25,15 @@ void gen_num() {
   gen_spaces();
 
   int val = choose(1000);
-  int len = sprintf(&buf[cursor], "%d", val);
+  int len;
+  if (choose(2) == 1) {
+    len = sprintf(&buf[cursor], "%d", val);
+  }
+  else {
+    buf[cursor++] = '0';
+    buf[cursor++] = 'x';
+    len = sprintf(&buf[cursor], "%x", val);
+  }
   cursor += len;
   buf[cursor++] = 'u';
 
