@@ -204,6 +204,8 @@ uint32_t eval(int begin, int end, bool *success) {
       return strtol(tokens[begin].str, NULL, 16);
     }
     else if (tokens[begin].type == TK_REG) {
+      char *reg_name = &tokens[begin].str[1];
+      printf(reg_name);
       return 0;
     }
     else {
