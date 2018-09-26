@@ -195,12 +195,12 @@ uint32_t eval(int begin, int end, bool *success) {
     return 0;
   }
   else if (begin == end) {
-    if (tokens[begin].type != TK_DEC) {
-      *success = false;
-      return 0;
+    if (tokens[begin].type == TK_DEC) {
+      return atoi(tokens[begin].str);
     }
     else {
-      return atoi(tokens[begin].str);
+      *success = false;
+      return 0;
     }
   }
   else if (check_parentheses(begin, end) == true) {
