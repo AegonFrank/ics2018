@@ -154,6 +154,15 @@ bool is_operator(int index) {
   }
 }
 
+bool is_unary_operator(int index) {
+  if (tokens[index].type == TK_DEREF) {
+   return true;
+  }
+  else {
+   return false;
+  } 
+}
+   
 int priority(int index) {
   switch(tokens[index].type) {
     case TK_AND:
@@ -265,28 +274,40 @@ uint32_t eval(int begin, int end, bool *success) {
       *success = false;
       return 0;
     }
-    uint32_t lhs = eval(begin, m_op - 1, success);
-    if (!success) return 0;
-    uint32_t rhs = eval(m_op + 1, end, success);
-    if (!success) return 0;
+    if (is_unary_operator(m_op)) {
+      uint32_t operand = eval(m_op + 1, end, success);
+      if (!success) return 0;
+      switch (tokens[m_op].type) {
+        case TK_DEREF:
+          return operand;
+        default:
+          assert(0);
+      }
+    }
+    else {
+      uint32_t lhs = eval(begin, m_op - 1, success);
+      if (!success) return 0;
+      uint32_t rhs = eval(m_op + 1, end, success);
+      if (!success) return 0;
 
-    switch (tokens[m_op].type) {
-      case '+':
-        return lhs + rhs;
-      case '-':
-        return lhs - rhs;
-      case '*':
-        return lhs * rhs;
-      case '/':
-        return lhs / rhs;
-      case TK_EQ:
-        return lhs == rhs;
-      case TK_NE:
-        return lhs != rhs;
-      case TK_AND:
-        return lhs && rhs;
-      default:
-        assert(0);
+      switch (tokens[m_op].type) {
+        case '+':
+          return lhs + rhs;
+        case '-':
+          return lhs - rhs;
+        case '*':
+          return lhs * rhs;
+        case '/':
+          return lhs / rhs;
+        case TK_EQ:
+          return lhs == rhs;
+        case TK_NE:
+          return lhs != rhs;
+        case TK_AND:
+          return lhs && rhs;
+        default:
+          assert(0);
+      }
     }
   }
 }
