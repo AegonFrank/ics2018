@@ -219,6 +219,25 @@ uint32_t eval(int begin, int end, bool *success) {
           return cpu.eip;
         }
       }
+      else {
+        int i;
+        for (i = 0; i < 8; ++i) {
+          if (strcmp(reg_name, regsw[i]) == 0) {
+            break;
+          }
+        }
+        if (i != 8) {
+          return reg_w(i);
+        }
+        for (i = 0; i < 8; ++i) {
+          if (strcmp(reg_name, regsb[i]) == 0) {
+            break;
+          }
+        }
+        if (i != 8) {
+          return reg_b(i);
+        }
+      }
     }
    
     *success = false;
