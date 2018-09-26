@@ -73,6 +73,9 @@ static int cmd_info(char *args) {
     }
     printf("eip\t\t0x%x\t\t%d\n", cpu.eip, cpu.eip);
   }
+  else if (strcmp(arg, "w") == 0) {
+    print_wp();
+  }
 
   return 0;
 }
