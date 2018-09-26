@@ -57,9 +57,18 @@ void gen_op() {
 
 void gen_expr(int depth) {
   if (depth == 0) {
-    gen_expr(depth + 1);
-    gen_op();
-    gen_expr(depth + 1);
+    switch(choose(3)) {
+      case 0:
+        gen('(');
+        gen_expr(depth + 1);
+        gen(')');
+        break;
+      default:
+        gen_expr(depth + 1);
+        gen_op();
+        gen_expr(depth + 1);
+        break;
+    }
   }
   else if (depth < 10) {
     switch(choose(5)) {
