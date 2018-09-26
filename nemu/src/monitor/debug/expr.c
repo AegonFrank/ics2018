@@ -279,7 +279,7 @@ uint32_t eval(int begin, int end, bool *success) {
       if (!success) return 0;
       switch (tokens[m_op].type) {
         case TK_DEREF:
-          return operand;
+          return vaddr_read(operand, 4);
         default:
           assert(0);
       }
