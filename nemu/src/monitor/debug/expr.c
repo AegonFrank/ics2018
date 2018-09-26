@@ -147,6 +147,7 @@ bool is_operator(int index) {
     case TK_EQ:
     case TK_NE:
     case TK_AND:
+    case TK_DEREF:
       return true;
     default:
       return false;
@@ -166,6 +167,8 @@ int priority(int index) {
     case '*':
     case '/':
       return 3;
+    case TK_DEREF:
+      return 4;
     default:
       assert(0);
   }
