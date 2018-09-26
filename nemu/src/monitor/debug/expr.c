@@ -205,13 +205,21 @@ uint32_t eval(int begin, int end, bool *success) {
     }
     else if (tokens[begin].type == TK_REG) {
       char *reg_name = &tokens[begin].str[1];
-      printf(reg_name);
-      return 0;
+      if (strlen(reg_name) == 3) {
+        int i;
+        for (i = 0; i < 8; ++i) {
+          if (strcmp(reg_name, regsl[i]) == 0) {
+            break;
+          }
+        }
+        if (i != 8) {
+          return reg_l(i);
+        }
+      }
     }
-    else {
-      *success = false;
-      return 0;
-    }
+   
+    *success = false;
+    return 0;
   }
   else if (check_parentheses(begin, end) == true) {
     return eval(begin + 1, end - 1, success);
