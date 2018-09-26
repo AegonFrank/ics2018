@@ -11,7 +11,7 @@ enum {
   TK_NOTYPE = 256, TK_EQ,
 
   /* TODO: Add more token types */
-  TK_DEC, TK_HEX, TK_REG
+  TK_DEC, TK_HEX, TK_REG, TK_NE, TK_AND
 };
 
 static struct rule {
@@ -26,6 +26,8 @@ static struct rule {
   {" +", TK_NOTYPE},                // spaces
   {"\\+", '+'},                     // plus
   {"==", TK_EQ},                    // equal
+  {"!=", TK_NE},                    // not equal
+  {"&&", TK_AND},                   // and
   {"-", '-'},                       // minus
   {"\\*", '*'},                     // multiply
   {"\\/", '/'},                     // divide
