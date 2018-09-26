@@ -139,6 +139,11 @@ static int cmd_test(char *args) {
   return 0;
 }
 
+static int cmd_w(char *args) {
+  new_wp();
+  return 0;
+}
+
 static struct {
   char *name;
   char *description;
@@ -154,6 +159,7 @@ static struct {
   { "x", "Scanning memory", cmd_x },
   { "p", "Evaluate expression", cmd_p },
   { "test", "Run expression evaluation tests", cmd_test },
+  { "w", "Set a watchpoint for an expression", cmd_w },
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
