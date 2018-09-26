@@ -91,6 +91,7 @@ static bool make_token(char *e) {
         switch (rules[i].token_type) {
 	        case TK_NOTYPE: 
 	          break;
+          case TK_REG:
           case TK_HEX:
 	        case TK_DEC: 
             assert(substr_len < 32);
@@ -201,6 +202,9 @@ uint32_t eval(int begin, int end, bool *success) {
     }
     else if (tokens[begin].type == TK_HEX) {
       return strtol(tokens[begin].str, NULL, 16);
+    }
+    else if (tokens[begin].type == TK_REG) {
+      return 0;
     }
     else {
       *success = false;
