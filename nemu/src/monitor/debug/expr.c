@@ -11,7 +11,7 @@ enum {
   TK_NOTYPE = 256, TK_EQ,
 
   /* TODO: Add more token types */
-  TK_DEC, TK_HEX, TK_REG, TK_NE, TK_AND
+  TK_DEC, TK_HEX, TK_REG, TK_NE, TK_AND, TK_DEREF
 };
 
 static struct rule {
@@ -295,6 +295,13 @@ uint32_t expr(char *e, bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
+
+   for (int i = 0; i < nr_token; ++i) {
+     if (tokens[i].type == '*' && (i == 0 || is_operator(i - 1))) {
+       tokens[i].type = TK_DEREF;
+     }
+   }
+
   *success = true;
   return eval(0, nr_token - 1, success);
 }
