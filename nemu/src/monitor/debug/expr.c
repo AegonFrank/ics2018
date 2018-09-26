@@ -23,16 +23,16 @@ static struct rule {
    * Pay attention to the precedence level of different rules.
    */
 
-  {" +", TK_NOTYPE},               // spaces
-  {"\\+", '+'},                    // plus
-  {"==", TK_EQ},                   // equal
-  {"-", '-'},                      // minus
-  {"\\*", '*'},                    // multiply
-  {"\\/", '/'},                    // divide
-  {"\\(", '('},                    // left brace
-  {"\\)", ')'},                    // right brace
-  {"0x[0-9a-f]+u?", TK_HEX},       // hexadecimal
-  {"[0-9]+u?", TK_DEC},            // decimal
+  {" +", TK_NOTYPE},                // spaces
+  {"\\+", '+'},                     // plus
+  {"==", TK_EQ},                    // equal
+  {"-", '-'},                       // minus
+  {"\\*", '*'},                     // multiply
+  {"\\/", '/'},                     // divide
+  {"\\(", '('},                     // left brace
+  {"\\)", ')'},                     // right brace
+  {"0x[0-9a-f]+u?", TK_HEX},        // hexadecimal
+  {"[0-9]+u?", TK_DEC},             // decimal
   {"\\$e?[abcdsi][hilpx]", TK_REG}, // register
 };
 
@@ -214,6 +214,9 @@ uint32_t eval(int begin, int end, bool *success) {
         }
         if (i != 8) {
           return reg_l(i);
+        }
+        if (strcmp(reg_name, "eip") == 0) {
+          return cpu.eip;
         }
       }
     }
