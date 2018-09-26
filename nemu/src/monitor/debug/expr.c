@@ -144,6 +144,9 @@ bool is_operator(int index) {
     case '-':
     case '*':
     case '/':
+    case TK_EQ:
+    case TK_NE:
+    case TK_AND:
       return true;
     default:
       return false;
@@ -152,12 +155,17 @@ bool is_operator(int index) {
 
 int priority(int index) {
   switch(tokens[index].type) {
+    case TK_AND:
+      return 0;
+    case TK_EQ:
+    case TK_NE:
+      return 1;
     case '+':
     case '-':
-      return 1;
+      return 2;
     case '*':
     case '/':
-      return 2;
+      return 3;
     default:
       assert(0);
   }
@@ -268,6 +276,12 @@ uint32_t eval(int begin, int end, bool *success) {
         return lhs * rhs;
       case '/':
         return lhs / rhs;
+      case TK_EQ:
+        return lhs == rhs;
+      case TK_NE:
+        return lhs != rhs;
+      case TK_AND:
+        return lhs && rhs;
       default:
         assert(0);
     }
