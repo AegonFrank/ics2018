@@ -69,6 +69,7 @@ void print_wp() {
 }
 
 bool check_wp() {
-  return true;
+  bool changed = false;
+  return changed;
 }
 
