@@ -67,3 +67,8 @@ void print_wp() {
     }
   }
 }
+
+bool check_wp() {
+  return false;
+}
+

@@ -20,4 +20,6 @@ void free_wp(WP *wp);
 
 void print_wp();
 
+bool check_wp();
+
 #endif
