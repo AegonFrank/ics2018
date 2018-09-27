@@ -143,7 +143,20 @@ static int cmd_test(char *args) {
 }
 
 static int cmd_w(char *args) {
-  new_wp();
+  if (args == NULL) {
+    printf("Expression needed\n");
+    return 0;
+  }
+
+  bool success;
+  uint32_t ans = expr(args, &success);
+
+  if (!success) {
+    printf("Invalid expression\n");
+  }
+  else {
+    printf("%d\n", ans);
+  }
   return 0;
 }
 
