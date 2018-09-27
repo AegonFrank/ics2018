@@ -155,7 +155,10 @@ static int cmd_w(char *args) {
     printf("Invalid expression\n");
   }
   else {
-    printf("%d\n", ans);
+    WP* wp = new_wp();
+    assert(strlen(args) < 100);
+    strcpy(wp->what, args);
+    wp->old_val = ans;
   }
   return 0;
 }
