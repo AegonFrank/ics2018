@@ -62,7 +62,7 @@ void print_wp() {
     printf("Num\tVal\t\tWhat\n");
     WP *wp = head;
     while (wp != NULL) {
-      printf("%d\t%u\t%s\n", wp->NO, wp->old_val, wp->what);
+      printf("%d\t%u\t\t%s\n", wp->NO, wp->old_val, wp->what);
       wp = wp->next;
     }
   }
