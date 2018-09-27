@@ -70,6 +70,15 @@ void print_wp() {
 
 bool check_wp() {
   bool changed = false;
+  WP *wp = head;
+  while (wp != NULL) {
+    bool success;
+    uint32_t new_val = expr(wp->what, &success);
+    if (new_val != wp->old_val) {
+      changed = true;
+    }
+    wp = wp->next;
+  }
   return changed;
 }
 
