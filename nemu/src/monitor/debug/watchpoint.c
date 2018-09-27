@@ -28,6 +28,17 @@ WP* new_wp() {
   return head; 
 }
 
+WP* find_wp(int NO) {
+  WP* wp = head;
+  while (wp != NULL) {
+    if (wp->NO == NO) {
+      return wp;
+    }
+    wp = wp->next;
+  }
+  return wp;
+}
+
 void free_wp(WP *wp) {
   if (wp == head) {
     head = head->next;

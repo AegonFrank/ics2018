@@ -147,6 +147,19 @@ static int cmd_w(char *args) {
   return 0;
 }
 
+static int cmd_d(char *args) {
+  char *arg = strtok(NULL, " ");
+  int NO = atoi(arg);
+  WP* wp = find_wp(NO);
+  if (wp == NULL) {
+    printf("No watchpoint number %d\n", NO);
+  }
+  else {
+    free_wp(wp);
+  }
+  return 0;
+}
+
 static struct {
   char *name;
   char *description;
@@ -163,6 +176,7 @@ static struct {
   { "p", "Evaluate expression", cmd_p },
   { "test", "Run expression evaluation tests", cmd_test },
   { "w", "Set a watchpoint for an expression", cmd_w },
+  { "d", "delete a watchpoint", cmd_d },
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
