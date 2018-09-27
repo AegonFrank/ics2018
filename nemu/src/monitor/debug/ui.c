@@ -149,6 +149,9 @@ static int cmd_w(char *args) {
 
 static int cmd_d(char *args) {
   char *arg = strtok(NULL, " ");
+  if (arg == NULL) {
+    return 0;
+  }
   int NO = atoi(arg);
   WP* wp = find_wp(NO);
   if (wp == NULL) {
