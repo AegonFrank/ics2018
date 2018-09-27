@@ -59,7 +59,7 @@ void print_wp() {
     printf("No watchpoints\n");
   }
   else {
-    printf("Num\tVal\tWhat\n");
+    printf("Num\tVal\t\tWhat\n");
     WP *wp = head;
     while (wp != NULL) {
       printf("%d\t%u\t%s\n", wp->NO, wp->old_val, wp->what);
