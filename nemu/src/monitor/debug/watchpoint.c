@@ -77,8 +77,8 @@ bool check_wp() {
     if (new_val != wp->old_val) {
       changed = true;
       printf("\nWatchpoint %d: %s\n\n", wp->NO, wp->what);
-      printf("Old value = %u\n", wp->old_val);
-      printf("New value = %u\n", new_val);
+      printf("Old value = 0x%x\n", wp->old_val);
+      printf("New value = 0x%x\n", new_val);
       wp->old_val = new_val;
     }
     wp = wp->next;
