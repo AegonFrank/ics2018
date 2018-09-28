@@ -114,7 +114,7 @@ static int cmd_p(char *args) {
     printf("Syntax error\n");
   }
   else {
-    printf("Value = %x\n", ans);
+    printf("Value = 0x%x\n", ans);
   }
 
   return 0;
