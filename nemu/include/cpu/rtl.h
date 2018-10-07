@@ -197,7 +197,15 @@ make_rtl_setget_eflags(SF)
 
 static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
   // eflags.ZF <- is_zero(result[width * 8 - 1 .. 0])
-  TODO();
+  if (width == 1) {
+    cpu.eflags.ZF = !(*result & 0xff);
+  }
+  else if (width == 2) {
+    cpu.eflags.ZF = !(*result & 0xffff);
+  }
+  else {
+    cpu.eflags.ZF = !*result;
+  }
 }
 
 static inline void rtl_update_SF(const rtlreg_t* result, int width) {
