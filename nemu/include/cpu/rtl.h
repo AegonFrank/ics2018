@@ -7,6 +7,7 @@
 #include "cpu/rtl-wrapper.h"
 
 extern rtlreg_t t0, t1, t2, t3, at;
+extern const rtlreg_t tzero;
 
 void decoding_set_jmp(bool is_jmp);
 bool interpret_relop(uint32_t relop, const rtlreg_t src1, const rtlreg_t src2);
