@@ -33,7 +33,9 @@ make_EHelper(call) {
 }
 
 make_EHelper(ret) {
+  printf("%x %x\n", cpu.esp, cpu.ebp);
   rtl_pop(&decoding.seq_eip);
+  printf("%x %x\n", cpu.esp, cpu.ebp);
 
   print_asm("ret");
 }
