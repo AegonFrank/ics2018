@@ -30,3 +30,4 @@ make_EHelper(adc);
 make_EHelper(or);
 make_EHelper(cltd);
 make_EHelper(idiv);
+make_EHelper(shl);
