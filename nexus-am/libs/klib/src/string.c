@@ -21,6 +21,7 @@ char* strcat(char* dst, const char* src) {
   assert(dst != NULL && src != NULL);
   char* d = dst;
   while (*d++ != '\0');
+  --d;
   while ((*d++ = *src++) != '\0');
   return dst;
 }
