@@ -259,6 +259,14 @@ uint32_t eval(int begin, int end, bool *success) {
         if (i != 8) {
           return reg_b(i);
         }
+        switch (reg_name[0]) {
+          case 'C': return cpu.eflags.CF;
+          case 'Z': return cpu.eflags.ZF;
+          case 'S': return cpu.eflags.SF;
+          case 'I': return cpu.eflags.IF;
+          case 'O': return cpu.eflags.OF;
+          default : break;
+        }
       }
     }
    
