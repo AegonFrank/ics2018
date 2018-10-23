@@ -23,19 +23,19 @@ static struct rule {
    * Pay attention to the precedence level of different rules.
    */
 
-  {" +", TK_NOTYPE},                // spaces
-  {"\\+", '+'},                     // plus
-  {"==", TK_EQ},                    // equal
-  {"!=", TK_NE},                    // not equal
-  {"&&", TK_AND},                   // and
-  {"-", '-'},                       // minus
-  {"\\*", '*'},                     // multiply
-  {"\\/", '/'},                     // divide
-  {"\\(", '('},                     // left brace
-  {"\\)", ')'},                     // right brace
-  {"0x[0-9a-f]+u?", TK_HEX},        // hexadecimal
-  {"[0-9]+u?", TK_DEC},             // decimal
-  {"\\$e?[abcdsi][hilpx]", TK_REG}, // register
+  {" +", TK_NOTYPE},                           // spaces
+  {"\\+", '+'},                                // plus
+  {"==", TK_EQ},                               // equal
+  {"!=", TK_NE},                               // not equal
+  {"&&", TK_AND},                              // and
+  {"-", '-'},                                  // minus
+  {"\\*", '*'},                                // multiply
+  {"\\/", '/'},                                // divide
+  {"\\(", '('},                                // left brace
+  {"\\)", ')'},                                // right brace
+  {"0x[0-9a-f]+u?", TK_HEX},                   // hexadecimal
+  {"[0-9]+u?", TK_DEC},                        // decimal
+  {"\\$(e?[abcdsi][hilpx]|[CZSIO]F)", TK_REG}, // register
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
