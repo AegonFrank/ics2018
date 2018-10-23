@@ -7,7 +7,10 @@ size_t strlen(const char *s) {
 }
 
 char *strcpy(char* dst,const char* src) {
-  return NULL;
+  assert(dst != NULL && src != NULL);
+  char* d = dst;
+  while ((*d++ = *src++) != '\0');
+  return dst;
 }
 
 char* strncpy(char* dst, const char* src, size_t n) {
