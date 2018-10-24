@@ -51,7 +51,15 @@ void* memcpy(void* out, const void* in, size_t n) {
 
 int memcmp(const void* s1, const void* s2, size_t n){
   assert(s1 != NULL && s2 != NULL);
-  return -1;
+  
+  unsigned char* str1 = (unsigned char*) s1;
+  unsigned char* str2 = (unsigned char*) s2;
+  while (n-- > 0) {
+    if (*str1++ != *str2++) {
+      return str1[-1] < str2[-1] ? -1 : 1;
+    }
+  }
+  return 0;
 }
 
 #endif
