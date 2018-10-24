@@ -8,7 +8,32 @@ int printf(const char *fmt, ...) {
 }
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
-  return 0;
+  int res = 0;
+  while (*fmt != '\0') {
+    if (*fmt == '%') {
+      switch (*++fmt) {
+        case 'd':
+          break;
+        case 's': {
+          char *s = va_arg(ap, char *);
+          while (*s != '\0') {
+            *out++ = *s++;
+            ++res;
+          }
+          break;
+        }
+        default: 
+          assert(0);
+      }
+      ++fmt;
+    }
+    else {
+      *out++ = *fmt++;
+      ++res;
+    }
+  }
+  *out = '\0';
+  return res;
 }
 
 int sprintf(char *out, const char *fmt, ...) {
