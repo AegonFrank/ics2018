@@ -7,11 +7,16 @@ static char * itoa(int num, char *str, int radix) {
   assert(num >= 0);
   static char ascii[] = "0123456789abcdef";
   int cnt = 0;
-  while (num != 0) {
+  do {
     str[cnt++] = ascii[num % radix];
     num /= radix;
-  }
+  } while (num != 0);
   str[cnt] = '\0';
+  for (int i = 0; i < cnt / 2; ++i) {
+    char tmp = str[i];
+    str[i] = str[cnt - i - 1];
+    str[cnt - i - 1] = tmp;
+  }
   return str;
 }
 
