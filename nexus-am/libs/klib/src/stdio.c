@@ -12,8 +12,21 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
   while (*fmt != '\0') {
     if (*fmt == '%') {
       switch (*++fmt) {
-        case 'd':
+        case 'd': {
+          int i = va_arg(ap, int);
+          if (i < 0) {
+            *out++ = '-';
+            ++res;
+          }
+          int cnt = 0;
+          while (i != 0) {
+            int r = i % 10;
+            r = r < 0 ? -r : r;
+            *(out + cnt++) = r + '0';
+            i /= 10;
+          }
           break;
+        }
         case 's': {
           char *s = va_arg(ap, char *);
           while (*s != '\0') {
