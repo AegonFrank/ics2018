@@ -3,6 +3,18 @@
 
 #ifndef __ISA_NATIVE__
 
+static char * itoa(int num, char *str, int radix) {
+  assert(num >= 0);
+  static char ascii[] = "0123456789abcdef";
+  int cnt = 0;
+  while (num != 0) {
+    str[cnt++] = ascii[num % radix];
+    num /= radix;
+  }
+  str[cnt] = '\0';
+  return str;
+}
+
 int printf(const char *fmt, ...) {
   return 0;
 }
@@ -14,16 +26,10 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
       switch (*++fmt) {
         case 'd': {
           int i = va_arg(ap, int);
-          if (i < 0) {
-            *out++ = '-';
+          itoa(i, out, 10);
+          while (*out != '\0') {
+            ++out;
             ++res;
-          }
-          int cnt = 0;
-          while (i != 0) {
-            int r = i % 10;
-            r = r < 0 ? -r : r;
-            *(out + cnt++) = r + '0';
-            i /= 10;
           }
           break;
         }
