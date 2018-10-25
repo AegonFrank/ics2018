@@ -25,7 +25,7 @@ int printf(const char *fmt, ...) {
 }
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
-  int res = 0;
+  char *old = out;
   while (*fmt != '\0') {
     if (*fmt == '%') {
       switch (*++fmt) {
@@ -34,7 +34,6 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
           itoa(i, out, 10);
           while (*out != '\0') {
             ++out;
-            ++res;
           }
           break;
         }
@@ -42,7 +41,6 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
           char *s = va_arg(ap, char *);
           while (*s != '\0') {
             *out++ = *s++;
-            ++res;
           }
           break;
         }
@@ -53,11 +51,10 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
     }
     else {
       *out++ = *fmt++;
-      ++res;
     }
   }
   *out = '\0';
-  return res;
+  return out - old;
 }
 
 int sprintf(char *out, const char *fmt, ...) {
