@@ -81,5 +81,15 @@ void difftest_step(uint32_t eip) {
       ref_r.edi != cpu.edi || 
       ref_r.eip != cpu.eip) {
     nemu_state = NEMU_ABORT;
+    printf("regs\tqemu\tnemu\n");
+    printf("eax\t0x%x\t0x%x\n", ref_r.eax, cpu.eax);
+    printf("ecx\t0x%x\t0x%x\n", ref_r.ecx, cpu.ecx);
+    printf("edx\t0x%x\t0x%x\n", ref_r.edx, cpu.edx);
+    printf("ebx\t0x%x\t0x%x\n", ref_r.ebx, cpu.ebx);
+    printf("esp\t0x%x\t0x%x\n", ref_r.esp, cpu.esp);
+    printf("ebp\t0x%x\t0x%x\n", ref_r.ebp, cpu.ebp);
+    printf("esi\t0x%x\t0x%x\n", ref_r.esi, cpu.esi);
+    printf("edi\t0x%x\t0x%x\n", ref_r.edi, cpu.edi);
+    printf("eip\t0x%x\t0x%x\n", ref_r.eip, cpu.eip);
   }
 }
