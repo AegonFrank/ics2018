@@ -3,6 +3,10 @@
 void difftest_skip_ref();
 void difftest_skip_dut();
 
+uint32_t pio_read_l(ioaddr_t addr);
+uint32_t pio_read_w(ioaddr_t addr);
+uint32_t pio_read_b(ioaddr_t addr);
+
 make_EHelper(lidt) {
   TODO();
 
@@ -42,7 +46,16 @@ make_EHelper(iret) {
 }
 
 make_EHelper(in) {
-  TODO();
+  if (id_dest->width == 1) {
+    t0 = pio_read_b(id_src->val);
+  }
+  else if (id_dest->width == 2) {
+    t0 = pio_read_w(id_src->val);
+  }
+  else {
+    t0 = pio_read_l(id_src->val);
+  }
+  operand_write(id_dest, &t0);
 
   print_asm_template2(in);
 
