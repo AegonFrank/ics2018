@@ -7,6 +7,10 @@ uint32_t pio_read_l(ioaddr_t addr);
 uint32_t pio_read_w(ioaddr_t addr);
 uint32_t pio_read_b(ioaddr_t addr);
 
+void pio_write_l(ioaddr_t addr, uint32_t data);
+void pio_write_w(ioaddr_t addr, uint32_t data);
+void pio_write_b(ioaddr_t addr, uint32_t data);
+
 make_EHelper(lidt) {
   TODO();
 
@@ -65,7 +69,15 @@ make_EHelper(in) {
 }
 
 make_EHelper(out) {
-  TODO();
+  if (id_src->width == 1) {
+    pio_write_b(id_dest->val, id_src->val);
+  }
+  else if (id_src->width == 2) {
+    pio_write_w(id_dest->val, id_src->val);
+  }
+  else {
+    pio_write_l(id_dest->val, id_src->val);
+  }
 
   print_asm_template2(out);
 
