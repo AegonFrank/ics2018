@@ -41,3 +41,4 @@ make_EHelper(imul2);
 make_EHelper(movsx);
 make_EHelper(sbb);
 make_EHelper(in);
+make_EHelper(out);
