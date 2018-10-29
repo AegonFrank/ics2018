@@ -43,10 +43,10 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
   char *old = out;
   while (*fmt != '\0') {
     if (*fmt == '%') {
-      _Bool exit = false;
+      _Bool exit = 0;
       char fill = ' ';
       int width = 0;
-      while (true) {
+      while (1) {
         switch (*++fmt) {
           case 'd': {
             int i = va_arg(ap, int);
@@ -54,7 +54,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
             while (*out != '\0') {
               ++out;
             }
-            exit = true;
+            exit = 1;
             break;
           }
           case 's': {
@@ -62,7 +62,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
             while (*s != '\0') {
               *out++ = *s++;
             }
-            exit = true;
+            exit = 1;
             break;
           }
           default: 
