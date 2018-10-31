@@ -91,7 +91,8 @@ make_EHelper(not) {
 }
 
 make_EHelper(rol) {
-  TODO();
+  rtl_shl(&t2, &id_dest->val, &id_src->val);
+  operand_write(id_dest, &t2);
 
   print_asm_template2(rol);
 }
