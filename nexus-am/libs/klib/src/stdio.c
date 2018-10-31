@@ -57,6 +57,15 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
             exit = 1;
             break;
           }
+          case 'x': {
+            int i = va_arg(ap, int);
+            itoa(i, out, 16, width, fill);
+            while (*out != '\0') {
+              ++out;
+            }
+            exit = 1;
+            break;
+          }
           case 's': {
             char *s = va_arg(ap, char *);
             while (*s != '\0') {
@@ -66,7 +75,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
             break;
           }
           default: 
-            if (*(fmt + 1) == 'd') {
+            if ((*(fmt + 1) == 'd') | (*(fmt + 1) == 'x')) {
               width = *fmt - '0';
               assert(0 <= width && width <= 9);
             }
