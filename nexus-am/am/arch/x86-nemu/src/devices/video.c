@@ -11,8 +11,8 @@ size_t video_read(uintptr_t reg, void *buf, size_t size) {
   switch (reg) {
     case _DEVREG_VIDEO_INFO: {
       _VideoInfoReg *info = (_VideoInfoReg *)buf;
-      info->width = inl(SCREEN_PORT) >> 16;
-      info->height = inw(SCREEN_PORT) - 100;
+      info->width = (inl(SCREEN_PORT) >> 16) - 100;
+      info->height = inw(SCREEN_PORT);
       return sizeof(_VideoInfoReg);
     }
   }
