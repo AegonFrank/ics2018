@@ -3,6 +3,10 @@
 #include <amdev.h>
 #include <klib.h>
 
+#define SCREEN_PORT 0x100 // Note that this is not the standard
+#define SCREEN_H 300
+#define SCREEN_W 400
+
 static uint32_t* const fb __attribute__((used)) = (uint32_t *)0x40000;
 
 size_t video_read(uintptr_t reg, void *buf, size_t size) {
