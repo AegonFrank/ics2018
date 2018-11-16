@@ -7,9 +7,28 @@
 
 static char print_buf[PRINT_BUF_SIZE];
 
+static char ascii[] = "0123456789abcdef";
+
 static char * itoa(int num, char *str, int radix, int width, char fill) {
   assert(num >= 0);
-  static char ascii[] = "0123456789abcdef";
+  int cnt = 0;
+  do {
+    str[cnt++] = ascii[num % radix];
+    num /= radix;
+  } while (num != 0);
+  while (cnt < width) {
+    str[cnt++] = fill;
+  }
+  str[cnt] = '\0';
+  for (int i = 0; i < cnt / 2; ++i) {
+    char tmp = str[i];
+    str[i] = str[cnt - i - 1];
+    str[cnt - i - 1] = tmp;
+  }
+  return str;
+}
+
+static char * utoa(unsigned num, char *str, int radix, int width, char fill) {
   int cnt = 0;
   do {
     str[cnt++] = ascii[num % radix];
@@ -60,6 +79,17 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
           case 'x': {
             int i = va_arg(ap, int);
             itoa(i, out, 16, width, fill);
+            while (*out != '\0') {
+              ++out;
+            }
+            exit = 1;
+            break;
+          }
+          case 'p': {
+            unsigned i = va_arg(ap, unsigned);
+            *out++ = '0';
+            *out++ = 'x';
+            utoa(i, out, 16, width, fill);
             while (*out != '\0') {
               ++out;
             }
