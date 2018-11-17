@@ -42,6 +42,7 @@ typedef struct {
       uint32_t OF: 1;
     };
   } eflags;
+  uint32_t cs;
   struct {
     uint16_t limit;
     uint32_t base;
