@@ -7,6 +7,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
    */
 
   printf("%d\t%d\n", cpu.idtr.limit, cpu.idtr.base);
+  printf("%d\t%d\n", NO, ret_addr);
   TODO();
 }
 
