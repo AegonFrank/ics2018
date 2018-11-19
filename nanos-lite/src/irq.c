@@ -2,6 +2,7 @@
 
 static _Context* do_event(_Event e, _Context* c) {
   switch (e.event) {
+    case _EVENT_SYSCALL: TODO();
     case _EVENT_YIELD: Log("Handled event _EVENT_YIELD"); break;
     default: panic("Unhandled event ID = %d", e.event);
   }
