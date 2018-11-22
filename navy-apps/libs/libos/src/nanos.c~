@@ -6,6 +6,9 @@
 #include <time.h>
 #include "syscall.h"
 
+extern char end;
+static char *brk = &end;
+
 #if defined(__ISA_X86__)
 intptr_t _syscall_(int type, intptr_t a0, intptr_t a1, intptr_t a2){
   int ret = -1;
@@ -33,11 +36,18 @@ int _open(const char *path, int flags, mode_t mode) {
 }
 
 int _write(int fd, void *buf, size_t count){
-  return _syscall_(SYS_write, fd, buf, count);
+  return _syscall_(SYS_write, fd, (intptr_t) buf, count);
 }
 
 void *_sbrk(intptr_t increment){
-  return (void *)-1;
+  char *old_brk = brk, *new_brk = brk + increment;
+  if (_syscall_(SYS_brk, new_brk, 0, 0) == 0) {
+    brk = new_brk;
+    return old_brk;
+  }
+  else {
+    return (void *) -1;
+  }
 }
 
 int _read(int fd, void *buf, size_t count) {
