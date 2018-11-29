@@ -36,3 +36,24 @@ static Finfo file_table[] __attribute__((used)) = {
 void init_fs() {
   // TODO: initialize the size of /dev/fb
 }
+
+int fs_open(const char *pathname, int flags, int mode) {
+  for (int i = 0; i < NR_FILES; ++i) {
+    if (strcmp(file_table[i].name, pathname) == 0) {
+      return i;
+    }
+  }
+  panic("File not found!");
+}
+
+size_t fs_read(int fd, void *buf, size_t len) {
+  panic("fs_read(%d, %p, %d)", fd, buf, len);
+}
+
+int fs_close(int fd) {
+  TODO();
+}
+
+size_t fs_filesz(int fd) {
+  return file_table[fd].size;
+}
