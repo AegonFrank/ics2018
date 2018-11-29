@@ -65,3 +65,7 @@ int fs_close(int fd) {
 size_t fs_filesz(int fd) {
   return file_table[fd].size;
 }
+
+size_t fs_lseek(int fd, size_t offset, int whence) {
+  TODO();
+}

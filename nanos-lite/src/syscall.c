@@ -12,6 +12,7 @@ int sys_write(int fd, void * buf, int count) {
 }
 
 int fs_open(const char *pathname, int flags, int mode);
+size_t fs_lseek(int fd, size_t offset, int whence);
 
 _Context* do_syscall(_Context *c) {
   uintptr_t a[4];
@@ -32,6 +33,9 @@ _Context* do_syscall(_Context *c) {
       break;
     case SYS_write:
       c->GPRx = sys_write(a[1], (void *) a[2], a[3]);
+      break;
+    case SYS_lseek:
+      c->GPRx = fs_lseek(a[1], a[2], a[3]);
       break;
     case SYS_brk:
       c->GPRx = 0;
