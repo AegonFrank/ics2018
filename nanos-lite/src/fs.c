@@ -67,5 +67,16 @@ size_t fs_filesz(int fd) {
 }
 
 size_t fs_lseek(int fd, size_t offset, int whence) {
-  TODO();
+  switch(whence) {
+    case SEEK_SET:
+      file_table[fd].open_offset = offset;
+      break;
+    case SEEK_CUR:
+      file_table[fd].open_offset += offset;
+      break;
+    case SEEK_END:
+      file_table[fd].open_offset = file_table[fd].size + offset;
+      break;
+  }
+  return file_table[fd].open_offset;
 }
