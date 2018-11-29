@@ -11,6 +11,8 @@ int sys_write(int fd, void * buf, int count) {
   return count;
 }
 
+int fs_open(const char *pathname, int flags, int mode);
+
 _Context* do_syscall(_Context *c) {
   uintptr_t a[4];
   a[0] = c->GPR1;
@@ -24,6 +26,9 @@ _Context* do_syscall(_Context *c) {
     case SYS_yield: 
       _yield();
       c->GPRx = 0;
+      break;
+    case SYS_open:
+      c->GPRx = fs_open((void *) a[1], a[2], a[3]);
       break;
     case SYS_write:
       c->GPRx = sys_write(a[1], (void *) a[2], a[3]);
