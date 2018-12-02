@@ -33,7 +33,8 @@ size_t invalid_write(const void *buf, size_t offset, size_t len) {
 static Finfo file_table[] __attribute__((used)) = {
   {"stdin", 0, 0, 0, invalid_read, invalid_write},
   {"stdout", 0, 0, 0, invalid_read, serial_write},
-  {"stderr", 0, 0, 0, invalid_read, invalid_write},
+  {"stderr", 0, 0, 0, invalid_read, serial_write},
+  {"/proc/dispinfo", 0, 0, 0, invalid_read, invalid_write},
 #include "files.h"
 };
 
