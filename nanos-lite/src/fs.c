@@ -49,7 +49,7 @@ int fs_open(const char *pathname, int flags, int mode) {
       return i;
     }
   }
-  panic("File not found!");
+  panic("File %s not found!", pathname);
 }
 
 size_t fs_read(int fd, void *buf, size_t len) {
