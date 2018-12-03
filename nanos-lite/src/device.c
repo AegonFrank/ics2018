@@ -28,8 +28,10 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
 }
 
 size_t fb_write(const void *buf, size_t offset, size_t len) {
-  TODO();
-  return 0;
+  offset /= 4, len /= 4;
+  int w = screen_width();
+  draw_rect((void *) buf, offset % w, offset / w, len, 1);
+  return len;
 }
 
 void init_device() {
