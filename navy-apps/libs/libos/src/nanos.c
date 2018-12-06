@@ -82,3 +82,13 @@ pid_t _getpid() {
   _exit(-SYS_getpid);
   return 1;
 }
+
+int _fork() {
+  _exit(SYS_fork);
+  return 0;
+}
+
+int _wait() {
+  _exit(SYS_wait);
+  return 0;
+}
