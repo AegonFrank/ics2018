@@ -76,6 +76,19 @@ void _switch(_Context *c) {
 }
 
 int _map(_Protect *p, void *va, void *pa, int mode) {
+  PDE* pde_base = p->ptr;
+  PTE* pte_base = NULL;
+  if (!(pde_base[PDX(va)] & PTE_P)) {
+    pte_base = pgalloc_usr(1);
+    for (int i = 0; i < NR_PTE; ++i) {
+      pte_base[i] = 0;
+    }
+    pde_base[PDX(va)] = (uintptr_t) pte_base | PTE_P;
+  }
+  else {
+    pte_base = (PTE *) PTE_ADDR(pde_base[PDX(va)]);
+  }
+  pte_base[PTX(va)] = (uintptr_t) pa | PTE_P;
   return 0;
 }
 

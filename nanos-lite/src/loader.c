@@ -10,7 +10,13 @@ size_t fs_filesz(int fd);
 static uintptr_t loader(PCB *pcb, const char *filename) {
   int fd = fs_open(filename, 0, 0);
   size_t size = fs_filesz(fd);
-  assert(fs_read(fd, (void *) DEFAULT_ENTRY, size) == size);
+  
+  for (int i = 0; i < size; i += 4096) {
+    void *pa = new_page(1);
+    _map(&pcb->as, (void *) DEFAULT_ENTRY + i, pa, 0);
+    fs_read(fd, pa, 4096);
+  }
+
   fs_close(fd);
   return DEFAULT_ENTRY;
 }
