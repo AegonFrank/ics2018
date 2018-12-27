@@ -58,7 +58,7 @@ typedef struct {
       uint32_t RESERVED: 26;
       uint32_t PG: 1;
     };
-  } cr0;
+  };
   rtlreg_t cr3;
 } CPU_state;
 
