@@ -60,7 +60,10 @@ paddr_t page_translate(vaddr_t vaddr) {
 
 uint32_t vaddr_read(vaddr_t vaddr, int len) {
   if ((vaddr & 0xfff) + len > 4096) {
-    panic("vaddr = 0x%x, len = %d", vaddr & 0xfff, len);
+    int len_lo = 4096 - (vaddr & 0xfff), len_hi = len - len_lo;
+    vaddr_t vaddr_lo = vaddr, vaddr_hi = vaddr + len_lo;
+    paddr_t paddr_lo = page_translate(vaddr_lo), paddr_hi = page_translate(vaddr_hi);
+    panic("paddr_lo = 0x%x, len_lo = %d, paddr_hi = 0x%x, len_hi = %d", paddr_lo, len_lo, paddr_hi, len_hi);
   }
   else {
     paddr_t paddr = page_translate(vaddr);
