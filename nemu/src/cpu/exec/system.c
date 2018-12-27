@@ -26,7 +26,7 @@ make_EHelper(lidt) {
 }
 
 make_EHelper(mov_r2cr) {
-  switch(id_dest->reg) {
+  switch (id_dest->reg) {
     case 0:
       cpu.cr0 = id_src->val;
       break;
@@ -41,7 +41,16 @@ make_EHelper(mov_r2cr) {
 }
 
 make_EHelper(mov_cr2r) {
-  TODO();
+  switch (id_src->reg) {
+    case 0:
+      operand_write(id_dest, &cpu.cr0);
+      break;
+    case 3:
+      operand_write(id_dest, &cpu.cr3);
+      break;
+    default:
+      TODO();
+  }
 
   print_asm("movl %%cr%d,%%%s", id_src->reg, reg_name(id_dest->reg, 4));
 
