@@ -43,7 +43,7 @@ paddr_t page_translate(vaddr_t vaddr) {
       panic("invalid pde, vaddr = 0x%x", vaddr);
     }
     paddr_t pte_base = pde & 0xfffff000;
-    uint32_t pte = paddr_read(pte_base + (vaddr & 0x003ff000) * 4, 4);
+    uint32_t pte = paddr_read(pte_base + (vaddr << 10 >> 22) * 4, 4);
     if (!(pte & 1)) {
       panic("invalid pte, vaddr = 0x%x", vaddr);
     }
