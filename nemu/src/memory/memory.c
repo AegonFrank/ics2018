@@ -36,7 +36,12 @@ void paddr_write(paddr_t addr, uint32_t data, int len) {
 }
 
 paddr_t page_translate(vaddr_t vaddr) {
-  return vaddr;
+  if (cpu.PG == 1) {
+    TODO();
+  }
+  else {
+    return vaddr;
+  }
 }
 
 uint32_t vaddr_read(vaddr_t vaddr, int len) {
