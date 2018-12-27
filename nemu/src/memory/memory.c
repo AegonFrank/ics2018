@@ -48,9 +48,6 @@ paddr_t page_translate(vaddr_t vaddr) {
       panic("invalid pte, vaddr = 0x%x", vaddr);
     }
     paddr_t paddr = (pte & 0xfffff000) + (vaddr & 0xfff);
-    if (paddr != vaddr) {
-      Log("vaddr = 0x%x, paddr = 0x%x", vaddr, paddr);
-    }
     return paddr;
   }
   else {
