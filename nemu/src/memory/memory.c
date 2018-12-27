@@ -35,10 +35,26 @@ void paddr_write(paddr_t addr, uint32_t data, int len) {
   }
 }
 
-uint32_t vaddr_read(vaddr_t addr, int len) {
-  return paddr_read(addr, len);
+paddr_t page_translate(vaddr_t vaddr) {
+  return vaddr;
 }
 
-void vaddr_write(vaddr_t addr, uint32_t data, int len) {
-  paddr_write(addr, data, len);
+uint32_t vaddr_read(vaddr_t vaddr, int len) {
+  if ((vaddr & 0xfff) + len > 4096) {
+    TODO();
+  }
+  else {
+    paddr_t paddr = page_translate(vaddr);
+    return paddr_read(paddr, len);
+  }
+}
+
+void vaddr_write(vaddr_t vaddr, uint32_t data, int len) {
+  if ((vaddr & 0xfff) + len > 4096) {
+    TODO();
+  } 
+  else {
+    paddr_t paddr = page_translate(vaddr);
+    paddr_write(paddr, data, len);
+  }
 }
