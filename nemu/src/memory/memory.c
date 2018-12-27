@@ -37,7 +37,21 @@ void paddr_write(paddr_t addr, uint32_t data, int len) {
 
 paddr_t page_translate(vaddr_t vaddr) {
   if (cpu.PG == 1) {
-    TODO();
+    paddr_t pde_base = cpu.cr3 & 0xfffff000;
+    uint32_t pde = paddr_read(pde_base + (vaddr >> 22) * 4, 4);
+    if (!(pde & 1)) {
+      panic("invalid pde, vaddr = 0x%x", vaddr);
+    }
+    paddr_t pte_base = pde & 0xfffff000;
+    uint32_t pte = paddr_read(pte_base + (vaddr & 0x003ff000) * 4, 4);
+    if (!(pte & 1)) {
+      panic("invalid pte, vaddr = 0x%x", vaddr);
+    }
+    paddr_t paddr = (pte & 0xfffff000) + (vaddr & 0xfff);
+    if (paddr != vaddr) {
+      Log("vaddr = 0x%x, paddr = 0x%x", vaddr, paddr);
+    }
+    return paddr;
   }
   else {
     return vaddr;
