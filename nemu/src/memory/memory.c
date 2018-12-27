@@ -60,7 +60,7 @@ paddr_t page_translate(vaddr_t vaddr) {
 
 uint32_t vaddr_read(vaddr_t vaddr, int len) {
   if ((vaddr & 0xfff) + len > 4096) {
-    TODO();
+    panic("vaddr = 0x%x, len = %d", vaddr & 0xfff, len);
   }
   else {
     paddr_t paddr = page_translate(vaddr);
