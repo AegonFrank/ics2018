@@ -10,6 +10,8 @@ int fs_close(int fd);
 
 void naive_uload(PCB *pcb, const char *filename);
 
+int mm_brk(uintptr_t new_brk);
+
 _Context* do_syscall(_Context *c) {
   uintptr_t a[4];
   a[0] = c->GPR1;
@@ -41,7 +43,7 @@ _Context* do_syscall(_Context *c) {
       c->GPRx = fs_lseek(a[1], a[2], a[3]);
       break;
     case SYS_brk:
-      c->GPRx = 0;
+      c->GPRx = mm_brk(a[1]);
       break;
     case SYS_execve:
       naive_uload(NULL, (void *) a[1]);
