@@ -6,6 +6,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
    * That is, use ``NO'' to index the IDT.
    */
   rtl_push((rtlreg_t *) &cpu.eflags);
+  cpu.eflags.IF = 0;
   rtl_push((rtlreg_t *) &cpu.cs);
   rtl_push((rtlreg_t *) &ret_addr);
   vaddr_t offset = 0;
@@ -15,4 +16,5 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
 }
 
 void dev_raise_intr() {
+  cpu.INTR = true;
 }
