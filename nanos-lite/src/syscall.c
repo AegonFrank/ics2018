@@ -8,7 +8,7 @@ size_t fs_read(int fd, void *buf, size_t len);
 size_t fs_write(int fd, const void *buf, size_t len);
 int fs_close(int fd);
 
-void naive_uload(PCB *pcb, const char *filename);
+_Context* naive_uload(PCB *pcb, const char *filename);
 
 int mm_brk(uintptr_t new_brk);
 
@@ -46,8 +46,7 @@ _Context* do_syscall(_Context *c) {
       c->GPRx = mm_brk(a[1]);
       break;
     case SYS_execve:
-      naive_uload(current, (void *) a[1]);
-      break;
+      return naive_uload(current, (void *) a[1]);
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 

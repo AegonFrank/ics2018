@@ -23,7 +23,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   return DEFAULT_ENTRY;
 }
 
-void naive_uload(PCB *pcb, const char *filename) {
+_Context* naive_uload(PCB *pcb, const char *filename) {
   int fd = fs_open(filename, 0, 0);
   size_t size = fs_filesz(fd);
   mm_brk(DEFAULT_ENTRY + size);
@@ -35,6 +35,7 @@ void naive_uload(PCB *pcb, const char *filename) {
   stack.end = stack.start + sizeof(pcb->stack);
 
   pcb->cp = _ucontext(&pcb->as, stack, stack, (void *) DEFAULT_ENTRY, NULL);
+  return pcb->cp;
 }
 
 void context_kload(PCB *pcb, void *entry) {
