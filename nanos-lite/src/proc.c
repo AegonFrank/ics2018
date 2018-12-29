@@ -5,6 +5,7 @@
 static PCB pcb[MAX_NR_PROC] __attribute__((used));
 static PCB pcb_boot;
 PCB *current;
+PCB *fg_pcb;
 
 void context_kload(PCB *pcb, void *entry);
 void context_uload(PCB *pcb, const char *filename);
@@ -27,11 +28,12 @@ void init_proc() {
   context_uload(&pcb[1], "/bin/init");
   context_uload(&pcb[2], "/bin/init");
   context_uload(&pcb[3], "/bin/init");
+  fg_pcb = &pcb[1];
   switch_boot_pcb();
 }
 
 _Context* schedule(_Context *prev) {
   current->cp = prev;
-  current = (current == &pcb[0]) ? &pcb[1] : &pcb[0];
+  current = (current != fg_pcb) ? fg_pcb : &pcb[0];
   return current->cp;
 }
