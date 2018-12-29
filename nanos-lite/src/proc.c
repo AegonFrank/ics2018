@@ -14,6 +14,10 @@ void switch_boot_pcb() {
   current = &pcb_boot;
 }
 
+void switch_fg_pcb(int i) {
+  fg_pcb = &pcb[i];
+}
+
 void hello_fun(void *arg) {
   int j = 1;
   while (1) {
@@ -28,7 +32,7 @@ void init_proc() {
   context_uload(&pcb[1], "/bin/init");
   context_uload(&pcb[2], "/bin/init");
   context_uload(&pcb[3], "/bin/init");
-  fg_pcb = &pcb[1];
+  switch_fg_pcb(1);
   switch_boot_pcb();
 }
 
