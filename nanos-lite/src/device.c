@@ -1,6 +1,8 @@
 #include "common.h"
 #include <amdev.h>
 
+void switch_fg_pcb(int i);
+
 size_t serial_write(const void *buf, size_t offset, size_t len) {
   for (int i = 0; i < len; ++i) {
     _putc(((char *) buf)[i]);
@@ -20,6 +22,14 @@ size_t events_read(void *buf, size_t offset, size_t len) {
   int key = read_key();
   if (key == _KEY_NONE) {
     return sprintf(buf, "t %d\n", uptime());
+  }
+  if (key & 0x8000) {
+    switch (key % 256) {
+      case _KEY_F1: switch_fg_pcb(1); break;
+      case _KEY_F2: switch_fg_pcb(2); break;
+      case _KEY_F3: switch_fg_pcb(3); break;
+      default: break;
+    }
   }
   return sprintf(buf, "%s %s\n", key & 0x8000 ? "kd" : "ku", keyname[key % 256]);
 }
