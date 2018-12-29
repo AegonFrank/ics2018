@@ -29,7 +29,12 @@ void naive_uload(PCB *pcb, const char *filename) {
   mm_brk(DEFAULT_ENTRY + size);
   fs_read(fd, (void *) DEFAULT_ENTRY, size);
   fs_close(fd);
-  ((void(*)())DEFAULT_ENTRY) ();
+  
+  _Area stack;
+  stack.start = pcb->stack;
+  stack.end = stack.start + sizeof(pcb->stack);
+
+  pcb->cp = _ucontext(&pcb->as, stack, stack, (void *) DEFAULT_ENTRY, NULL);
 }
 
 void context_kload(PCB *pcb, void *entry) {
