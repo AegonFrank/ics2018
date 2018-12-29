@@ -23,8 +23,10 @@ void hello_fun(void *arg) {
 }
 
 void init_proc() {
-  context_uload(&pcb[0], "/bin/init");
-  context_uload(&pcb[1], "/bin/hello");
+  context_uload(&pcb[0], "/bin/hello");
+  context_uload(&pcb[1], "/bin/init");
+  context_uload(&pcb[2], "/bin/init");
+  context_uload(&pcb[3], "/bin/init");
   switch_boot_pcb();
 }
 
